@@ -48,7 +48,7 @@ stockProductos.forEach ((producto) =>{
     
     // funcion agregar producto
     atag.addEventListener("click", (e) => {
-        agregarproducto();
+        agregarProducto();
         total();
         mostrarCarrito();
     });
@@ -57,7 +57,7 @@ stockProductos.forEach ((producto) =>{
     let cantidadElegida = 0;
     
 
-    const agregarproducto = () =>{
+    const agregarProducto = () =>{
             cantidadElegida += 1;
             // si el elemento no existe ya en el array productosElegidos que....
         if (cantidadElegida <2){
@@ -72,9 +72,10 @@ stockProductos.forEach ((producto) =>{
         }
         // si ya existe actualizamos cantidadElegida
         else{
-            var productoParaActualizar = productosElegidos.find((prod) =>{
+            let productoParaActualizar = productosElegidos.find((prod) =>{
             return prod.id == producto.id
         })
+        console.log(productoParaActualizar)
         productoParaActualizar.precioSubTotal = cantidadElegida * productoParaActualizar.precio;
         productoParaActualizar.elegidos = productoParaActualizar.elegidos + 1;
         atag.innerHTML =  productoParaActualizar.elegidos;
@@ -159,6 +160,7 @@ const mostrarCarrito = () => {
                 const prodId = id
                 productosElegidos = productosElegidos.filter((producto) => producto.id !== prodId);
                 console.log(carrito);
+                productosElegidos.cantidadElegida = 0;
                 modalBody.innerHTML = ""
                 mostrarCarrito();
                 total();
@@ -172,6 +174,7 @@ const mostrarCarrito = () => {
 // totalPrecio
 function total() {
 const totalPrecio = productosElegidos.reduce((acumulador, producto) => acumulador + producto.precioSubTotal, 0);
+
 fotterModalPadre.innerHTML= "";
 const fotterModal = document.createElement('p');
 fotterModal.classList.add('card','card-primary');
@@ -182,7 +185,7 @@ const botonVaciarCarrito = document.createElement('button');
 botonVaciarCarrito.classList.add('btn', 'btn-danger');
 botonVaciarCarrito.textContent = "Vaciar Carrito";
 botonVaciarCarrito.addEventListener("click", () => {
-    carrito = []
+    productosElegidos = []
     mostrarCarrito()
     total()
 });
