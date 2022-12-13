@@ -1,12 +1,12 @@
 const stockProductos = [
-    { id:1, nombre:"Chomba Champion", precio:5000, img1:"../img/2.png", img2:"../img/1.png", stock: 2, talle:"M", elegidos:1},
-    { id:2, nombre:"Buzo Michigan", precio:7500, img1:"../img/4.png", img2:"../img/5.png", stock: 2, talle:"XL", elegidos:1},
-    { id:3, nombre:"Buzo Raiders", precio:8000, img1:"../img/6.png", img2:"../img/7.png", stock: 2, talle:"XL", elegidos:1},
-    { id:4, nombre:"Chomba Polo Ralph Lauren", precio:4000, img1:"../img/9.png", img2:"../img/10.png", stock: 2, talle:"L slim fit", elegidos:1},
-    { id:5, nombre:"Chomba Tommy Hilfiger", precio:3500, img1:"../img/11.png", img2:"../img/12.png", stock: 2, talle:"L", elegidos:1},
-    { id:6, nombre:"Chomba Tommy Hilfiger", precio:2500, img1:"../img/13.png", img2:"../img/14.png", stock: 2, talle:"M", elegidos:1},
-    { id:7, nombre:"Chomba Polo Ralph Lauren", precio:4500, img1:"../img/15.png", img2:"../img/16.png", stock: 2, talle:"L", elegidos:1},
-    { id:8, nombre:"Chomba RLX Ralph Lauren", precio:4500, img1:"../img/17.png", img2:"../img/18.png", stock: 2, talle:"M", elegidos:1},
+    { id:1, nombre:"Chomba Champion", precio:5000, img1:"../img/2.png", img2:"../img/1.png", stock: 2, talle:"M", elegidos:0, precioSubTotal:5000},
+    { id:2, nombre:"Buzo Michigan", precio:7500, img1:"../img/4.png", img2:"../img/5.png", stock: 2, talle:"XL", elegidos:0, precioSubTotal:7500},
+    { id:3, nombre:"Buzo Raiders", precio:8000, img1:"../img/6.png", img2:"../img/7.png", stock: 2, talle:"XL", elegidos:0, precioSubTotal:8000},
+    { id:4, nombre:"Chomba Polo Ralph Lauren", precio:4000, img1:"../img/9.png", img2:"../img/10.png", stock: 2, talle:"L slim fit", elegidos:0, precioSubTotal:4000},
+    { id:5, nombre:"Chomba Tommy Hilfiger", precio:3500, img1:"../img/11.png", img2:"../img/12.png", stock: 2, talle:"L", elegidos:0, precioSubTotal:3500},
+    { id:6, nombre:"Chomba Tommy Hilfiger", precio:2500, img1:"../img/13.png", img2:"../img/14.png", stock: 2, talle:"M", elegidos:0, precioSubTotal:2500},
+    { id:7, nombre:"Chomba Polo Ralph Lauren", precio:4500, img1:"../img/15.png", img2:"../img/16.png", stock: 2, talle:"L", elegidos:0, precioSubTotal:4500},
+    { id:8, nombre:"Chomba RLX Ralph Lauren", precio:4500, img1:"../img/17.png", img2:"../img/18.png", stock: 2, talle:"M", elegidos:0, precioSubTotal:4500},
 ] 
 
 const producto = document.querySelector("#productos");
@@ -47,37 +47,39 @@ stockProductos.forEach ((producto) =>{
     atag.textContent = 'Agregar';
     
     // funcion agregar producto
-    
-    
-    atag.addEventListener("click", (id) => {
+    atag.addEventListener("click", (e) => {
         agregarproducto()
     });
-    const agregarproducto = (id) =>{
-        productosElegidos.push({
+
+
+    let cantidadElegida = 0;
+    
+
+    const agregarproducto = () =>{
+            cantidadElegida += 1;
+            // si el elemento no existe ya en el array productosElegidos que....
+        if (cantidadElegida <2){
+            productosElegidos.push({
             id : producto.id,
             nombre : producto.nombre,
             precio : producto.precio,
             img : producto.img1,
-            elegidos : producto.elegidos,
-        });
-        console.log(productosElegidos)
-        const existe = productosElegidos.reduce(producto => producto.id === productosElegidos.id);
-        console.log(existe)
-        if (existe){
-            carrito.push({
-                id : producto.id,
-                nombre : producto.nombre,
-                precio : producto.precio,
-                img : producto.img1,
-                elegidos : producto.elegidos,
+            precioSubTotal : producto.precioSubTotal,
+            elegidos : cantidadElegida,
             });
-        console.log(carrito)
-            total();
         }
-        else {
-            producto.elegidos = +1
-        };
-        };
+        // si ya existe actualizamos cantidadElegida
+        else{
+            var productoParaActualizar = productosElegidos.find((prod) =>{
+            return prod.id == producto.id
+        });
+        productoParaActualizar.precioSubTotal = cantidadElegida * productoParaActualizar.precio;
+        productoParaActualizar.elegidos = productoParaActualizar.elegidos + 1;
+        atag.innerHTML =  productoParaActualizar.elegidos;
+        console.log(productosElegidos)
+    }
+}
+        
     productos.append(divCard);
     divCard.append(img1,divCardBody);
     divCard.append(img2,divCardBody);
@@ -104,8 +106,9 @@ stockProductos.forEach ((producto) =>{
         else if (img1.src = producto.img2){
             img1.src = producto.img1
             img2.src = producto.img2
-        }
+        };
     });
+    
 });
 
 
@@ -122,7 +125,7 @@ botonCarrito.addEventListener ("click", () => {
 
 const mostrarCarrito = () => {
         modalBody.innerHTML='';
-        carrito.forEach ((producto) => {
+        productosElegidos.forEach ((producto) => {
             
             const {id, nombre, precio, img, elegidos} = producto
             
@@ -135,7 +138,7 @@ const mostrarCarrito = () => {
                 <img class="img-fluid img-carrito" src="${img}"/>
                 </div>
             <div>
-                <p>Producto: ${elegidos}</p>
+                <p>Cantidad: ${elegidos}</p>
                 <p>Producto: ${nombre}</p>
                 <p>Precio: ${precio}</p>
                 </div>
@@ -157,7 +160,7 @@ const mostrarCarrito = () => {
                 mostrarCarrito();
                 total()
                 });
-                
+                total()
             modalBody.append(divCarrito);
         });
     };
@@ -165,7 +168,7 @@ const mostrarCarrito = () => {
 
 // totalPrecio
 function total() {
-const totalPrecio = carrito.reduce((acumulador, producto) => acumulador + producto.precio, 0);
+const totalPrecio = productosElegidos.reduce((acumulador, producto) => acumulador + producto.precioSubTotal, 0);
 console.log(totalPrecio);
 fotterModalPadre.innerHTML= "";
 const fotterModal = document.createElement('p');
@@ -184,62 +187,4 @@ botonVaciarCarrito.addEventListener("click", () => {
 
 fotterModalPadre.append(botonVaciarCarrito);
 fotterModalPadre.append(fotterModal);
-}
-
-
-
-
-
-
-
-// let productosSeleccionados =[];
-    // let productoElegido = {};
-    // productosSeleccionados.push(productoElegido)
-    // function clickearBoton (e){
-    //     productosSeleccionados.forEach(productoPrecio => {
-    //     precioTotal+= productoPrecio.precio ;
-    //    });            
-    //     if(sessionStorage.getItem('stock')==! null){
-    //         sessionStorage.setItem('precioTotalCompra', precioTotal); 
-    //         atag.textContent = sessionStorage.getItem('stock');
-
-    //     }else{
-    //         atag.textContent = sessionStorage.getItem('stock');
-    //     }
-    // }
-    // precioCompra.innerHTML= precioTotal;
-    
-            // if(sessionStorage.getItem('stock') == null ){
-        //     sessionStorage.setItem('stock',cantidadStock)
-        //     divCardBody.append(pSinStock)
-        //     atag.textContent = 'CON STOCK';
-        //     atag.classList.remove('btn-outline-primary')
-        //     atag.classList.add('btn-warning')
-        // }else{
-        //     sessionStorage.get('stock')
-        // 
-        // }
-// }
-
-// function sumaProducto(id){
-//     const item = stockProductos.find((productos) => productos.id === id)
-//     carrito.push (item) 
-// }
-
-// sessionStorage.setItem('CantidadTotalDeProductos',totalCantidad)
-// stockProductos.forEach((prod) => {
-//     const { id, nombre, precio, desc, img, stock, talle } = prod;
-//     if (productos) {
-//         productos.innerHTML += `
-//         <div class="card text-dark mt-5" style="width: 20rem;">
-//             <img class="card-img-top mt-2" src="${img}" alt="Card image cap">
-//                 <div class="card-body">
-//                     <h5 class="card-title">${nombre}</h5>
-//                     <p class="card-text">Talle: ${talle} <br> $ ${precio}</p>
-//                     <a class="class="btn btn-primary" href="../pages/producto${id}.html">Comprar</a>
-//                 </div>
-//         </div>
-//     `;
-//     }
-// });
-// 
+};
