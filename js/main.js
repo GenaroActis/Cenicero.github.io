@@ -48,7 +48,9 @@ stockProductos.forEach ((producto) =>{
     
     // funcion agregar producto
     atag.addEventListener("click", (e) => {
-        agregarproducto()
+        agregarproducto();
+        total();
+        mostrarCarrito();
     });
 
 
@@ -72,13 +74,13 @@ stockProductos.forEach ((producto) =>{
         else{
             var productoParaActualizar = productosElegidos.find((prod) =>{
             return prod.id == producto.id
-        });
+        })
         productoParaActualizar.precioSubTotal = cantidadElegida * productoParaActualizar.precio;
         productoParaActualizar.elegidos = productoParaActualizar.elegidos + 1;
         atag.innerHTML =  productoParaActualizar.elegidos;
         console.log(productosElegidos)
-    }
-}
+    };
+};
         
     productos.append(divCard);
     divCard.append(img1,divCardBody);
@@ -127,7 +129,7 @@ const mostrarCarrito = () => {
         modalBody.innerHTML='';
         productosElegidos.forEach ((producto) => {
             
-            const {id, nombre, precio, img, elegidos} = producto
+            const {id, nombre, precio, img, elegidos, precioSubTotal} = producto
             
             const divCarrito = document.createElement('div');
             divCarrito.classList.add('divCarrito');
@@ -140,6 +142,7 @@ const mostrarCarrito = () => {
             <div>
                 <p>Cantidad: ${elegidos}</p>
                 <p>Producto: ${nombre}</p>
+                <p>Precio subTotal: ${precioSubTotal}</p>
                 <p>Precio: ${precio}</p>
                 </div>
             </div>
@@ -154,11 +157,11 @@ const mostrarCarrito = () => {
             divCarrito.appendChild(buttonEli);
             buttonEli.addEventListener("click", () => {
                 const prodId = id
-                carrito = carrito.filter((producto) => producto.id !== prodId);
+                productosElegidos = productosElegidos.filter((producto) => producto.id !== prodId);
                 console.log(carrito);
                 modalBody.innerHTML = ""
                 mostrarCarrito();
-                total()
+                total();
                 });
                 total()
             modalBody.append(divCarrito);
@@ -169,7 +172,6 @@ const mostrarCarrito = () => {
 // totalPrecio
 function total() {
 const totalPrecio = productosElegidos.reduce((acumulador, producto) => acumulador + producto.precioSubTotal, 0);
-console.log(totalPrecio);
 fotterModalPadre.innerHTML= "";
 const fotterModal = document.createElement('p');
 fotterModal.classList.add('card','card-primary');
