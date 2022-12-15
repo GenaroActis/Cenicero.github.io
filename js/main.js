@@ -17,6 +17,8 @@ let carrito = [];
 let productosElegidos = [];
 
 
+
+
 // cards productos
 stockProductos.forEach ((producto) =>{
     const divCard = document.createElement('div');
@@ -53,13 +55,11 @@ stockProductos.forEach ((producto) =>{
         mostrarCarrito();
     });
 
-
     let cantidadElegida = 0;
     
-
-    const agregarProducto = () =>{
-            cantidadElegida += 1;
-            // si el elemento no existe ya en el array productosElegidos que....
+const agregarProducto = () =>{
+        cantidadElegida += 1;
+        // si el elemento no existe ya en el array productosElegidos que....
         if (cantidadElegida <2){
             productosElegidos.push({
             id : producto.id,
@@ -74,12 +74,13 @@ stockProductos.forEach ((producto) =>{
         else{
             let productoParaActualizar = productosElegidos.find((prod) =>{
             return prod.id == producto.id
-        })
-        console.log(productoParaActualizar)
-        productoParaActualizar.precioSubTotal = cantidadElegida * productoParaActualizar.precio;
+        });
+        let precioParaActualizar = productoParaActualizar.precio;
+        productoParaActualizar.precioSubTotal = cantidadElegida * precioParaActualizar;
         productoParaActualizar.elegidos = productoParaActualizar.elegidos + 1;
         atag.innerHTML =  productoParaActualizar.elegidos;
-        console.log(productosElegidos)
+        console.log(productosElegidos);
+        console.log(productoParaActualizar);
     };
 };
         
@@ -150,20 +151,30 @@ const mostrarCarrito = () => {
             `;
             
             // eliminar producto
-            
+            let productoParaActualizar = productosElegidos.find((prod) =>{
+                return prod.id == producto.id
+            });
+            console.log (productoParaActualizar.elegidos)
             const buttonEli = document.createElement('button');
             buttonEli.classList.add('btn', 'btn-danger');
             buttonEli.setAttribute('id', 'eliProd');
             buttonEli.textContent = 'Eliminar Producto';
             divCarrito.appendChild(buttonEli);
-            buttonEli.addEventListener("click", () => {
-                const prodId = id
-                productosElegidos = productosElegidos.filter((producto) => producto.id !== prodId);
-                console.log(carrito);
-                productosElegidos.cantidadElegida = 0;
-                modalBody.innerHTML = ""
-                mostrarCarrito();
-                total();
+            buttonEli.addEventListener("click", (e) => {
+                if (productoParaActualizar.elegidos < 2 ){
+                    const prodId = id
+                    productosElegidos = productosElegidos.filter((producto) => producto.id !== prodId);
+                    console.log(carrito);
+                    mostrarCarrito();
+                    total();
+                }
+                else {
+                    productosElegidos.elegidos = productoParaActualizar.elegidos;
+                    productoParaActualizar.elegidos = productosElegidos.elegidos - 1; 
+                    modalBody.innerHTML = "";
+                    mostrarCarrito();
+                    total();
+                };
                 });
                 total()
             modalBody.append(divCarrito);
@@ -184,8 +195,10 @@ fotterModal.textContent = 'Total:$' + totalPrecio;
 const botonVaciarCarrito = document.createElement('button');
 botonVaciarCarrito.classList.add('btn', 'btn-danger');
 botonVaciarCarrito.textContent = "Vaciar Carrito";
-botonVaciarCarrito.addEventListener("click", () => {
-    productosElegidos = []
+botonVaciarCarrito.addEventListener("click", (e) => {
+    productosElegidos = [];
+    productoParaActualizar = [];
+
     mostrarCarrito()
     total()
 });
