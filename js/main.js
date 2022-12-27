@@ -204,6 +204,7 @@ const mostrarCarrito = () => {
                     mostrarCarrito();
                     total();
                 };
+                guardarLocal();
                 });
                 total()
             modalBody.append(divCarrito);
