@@ -59,13 +59,11 @@ stockProductos.forEach ((producto) =>{
         mostrarCarrito();
     });
 
-    let cantidadElegida = 0;
 
 const agregarProducto = (id) =>{
         const productoEnCarrito = productosElegidos.find((prod) =>{
             return prod.id == producto.id
         });;
-    cantidadElegida ++;
         
         // si ya existe actualizamos cantidadElegida
         if (productoEnCarrito){
