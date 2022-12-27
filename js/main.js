@@ -13,11 +13,15 @@ const producto = document.querySelector("#productos");
 const modalBody = document.querySelector("#modal-body");
 const fotterModalPadre = document.querySelector("#modalFooter");
 
-let carrito = [];
 let productosElegidos = [];
 
 
-
+function guardarLocal() {
+    localStorage.setItem("productosElegidos", JSON.stringify(productosElegidos));
+};
+if(localStorage.getItem("productosElegidos")){
+    productosElegidos = JSON.parse(localStorage.getItem("productosElegidos"));
+}
 
 // cards productos
 stockProductos.forEach ((producto) =>{
@@ -55,19 +59,22 @@ stockProductos.forEach ((producto) =>{
         mostrarCarrito();
     });
 
-    
+    let cantidadElegida = 0;
+
 const agregarProducto = (id) =>{
         const productoEnCarrito = productosElegidos.find((prod) =>{
             return prod.id == producto.id
         });;
-         // si ya existe actualizamos cantidadElegida
+    cantidadElegida ++;
+        
+        // si ya existe actualizamos cantidadElegida
         if (productoEnCarrito){
                 let productoParaActualizar = productosElegidos.find((prod) =>{
                 return prod.id == producto.id
             });
                 let precioParaActualizar = productoParaActualizar.precio;
-                productoParaActualizar.precioSubTotal = productoParaActualizar.elegidos * precioParaActualizar;
                 productoParaActualizar.elegidos = productoParaActualizar.elegidos + 1;
+                productoParaActualizar.precioSubTotal = productoParaActualizar.elegidos * precioParaActualizar;
                 atag.innerHTML =  productoParaActualizar.elegidos;
                 console.log(productosElegidos);
                 console.log(productoParaActualizar);
@@ -85,8 +92,9 @@ const agregarProducto = (id) =>{
                 console.log("click")
                 console.log(productoEnCarrito);
     };
-};
-        
+    guardarLocal();
+};  
+    
     productos.append(divCard);
     divCard.append(img1,divCardBody);
     divCard.append(img2,divCardBody);
@@ -132,6 +140,20 @@ botonCarrito.addEventListener ("click", () => {
 
 const mostrarCarrito = () => {
         modalBody.innerHTML='';
+        if (productosElegidos.length === 0){
+            const divCarrito = document.createElement('div');
+            divCarrito.classList.add('divCarrito');
+            
+            divCarrito.innerHTML += `
+            <div class="modal-contenedor">
+                <div>
+                <p>"!No agregaste nada!"</p>
+                </div>
+            </div>
+            `;
+            modalBody.append(divCarrito);
+        }
+        else{
         productosElegidos.forEach ((producto) => {
             
             const {id, nombre, precio, img, elegidos, precioSubTotal} = producto
@@ -165,18 +187,19 @@ const mostrarCarrito = () => {
                 let productoParaActualizar = productosElegidos.find((prod) =>{
                     return prod.id == producto.id
                 });
+                modalBody.innerHTML = "";
                 if (productoParaActualizar.elegidos < 2 ){
-                    modalBody.innerHTML = "";
                     const prodId = id
                     productosElegidos = productosElegidos.filter((producto) => producto.id !== prodId);
                     productoParaActualizar.elegidos = 0;
-                    cantidadElegida = 0;
                     mostrarCarrito();
-                    console.log (producto.elegidos);
                     total();
                 }
                 else {
-                    modalBody.innerHTML = "";
+                    let productoParaActualizar = productosElegidos.find((prod) =>{
+                        return prod.id == producto.id
+                    });
+                    
                     productoParaActualizar.elegidos = productoParaActualizar.elegidos - 1;
                     mostrarCarrito();
                     total();
@@ -186,7 +209,7 @@ const mostrarCarrito = () => {
             modalBody.append(divCarrito);
         });
     };
-    
+};
 
 // totalPrecio
 function total() {
