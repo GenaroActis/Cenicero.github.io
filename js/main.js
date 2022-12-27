@@ -2,7 +2,7 @@ const stockProductos = [
     { id:1, nombre:"Chomba Champion", precio:5000, img1:"../img/2.png", img2:"../img/1.png", stock: 2, talle:"M", precioSubTotal:5000},
     { id:2, nombre:"Buzo Michigan", precio:7500, img1:"../img/4.png", img2:"../img/5.png", stock: 2, talle:"XL", precioSubTotal:7500},
     { id:3, nombre:"Buzo Raiders", precio:8000, img1:"../img/6.png", img2:"../img/7.png", stock: 2, talle:"XL", precioSubTotal:8000},
-    { id:4, nombre:"Chomba Polo Ralph Lauren", precio:4000, img1:"../img/9.png", img2:"../img/10.png", stock: 2, talle:"L", elegidos:0, precioSubTotal:4000},
+    { id:4, nombre:"Chomba Polo Ralph Lauren", precio:4000, img1:"../img/9.png", img2:"../img/10.png", stock: 2, talle:"L", precioSubTotal:4000},
     { id:5, nombre:"Chomba Tommy Hilfiger", precio:3500, img1:"../img/11.png", img2:"../img/12.png", stock: 2, talle:"L", precioSubTotal:3500},
     { id:6, nombre:"Chomba Tommy Hilfiger", precio:2500, img1:"../img/13.png", img2:"../img/14.png", stock: 2, talle:"M", precioSubTotal:2500},
     { id:7, nombre:"Chomba Polo Ralph Lauren", precio:4500, img1:"../img/15.png", img2:"../img/16.png", stock: 2, talle:"L", precioSubTotal:4500},
