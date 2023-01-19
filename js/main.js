@@ -37,8 +37,8 @@ botonProcesarCompra.addEventListener("click", () => {
             confirmButtonText: "Aceptar",
         });
     } else {
-        location.href = "compra.html";
-    }
+        location.href = "../pages/compra.html";
+    };
 });
 
 
