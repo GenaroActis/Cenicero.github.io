@@ -13,32 +13,33 @@ const productosApp = document.querySelector("#productos");
 const modalBody = document.querySelector("#modal-body");
 const fotterModalPadre = document.querySelector("#modalFooter");
 const botonProcesarCompra = document.querySelector("#botonProcesarCompra");
-const precio = document.querySelector("#totalPrecio");
+
 
 const productosJson = "../json/productos.json";
 
 let productosElegidos = [];
 
 
-
+//funcion guardar en local
 function guardarLocal() {
     localStorage.setItem("productosElegidos", JSON.stringify(productosElegidos));
 };
 if(localStorage.getItem("productosElegidos")){
     productosElegidos = JSON.parse(localStorage.getItem("productosElegidos"));
 }
-    botonProcesarCompra.addEventListener("click", () => {
-        if (productosElegidos.length === 0) {
-            console.log("carrito vacio")
-        // Swal.fire({
-        //     title: "¡Tu carrito está vacio!",
-        //     icon: "error",
-        //     confirmButtonText: "Aceptar",
-        // });
-        } else {
+//boton procesar la compra
+botonProcesarCompra.addEventListener("click", () => {
+    if (productosElegidos.length === 0) {
+        console.log("carrito vacio")
+        Swal.fire({
+            title: "¡Tu carrito está vacio!",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+        });
+    } else {
         location.href = "compra.html";
-        }
-    });
+    }
+});
 
 
 // traemos los productos del json
@@ -53,9 +54,9 @@ fetch(productosJson)
     const divCardBody = document.createElement('div');
     const h5tag = document.createElement('h1');
     const ptagTalle = document.createElement('h2');
-    const ptagPrecio = document.createElement('h2');
+    const ptagPrecio = document.createElement('h1');
     const atag = document.createElement('button');
-    const tagTalle = document.createElement('h3');
+    const tagTalle = document.createElement('h4');
 
     divCard.classList.add('card','text-dark','mt-5');
     img1.classList.add('card-img-top','mt-2', 'img-fluid');
@@ -85,6 +86,7 @@ fetch(productosJson)
             }
             }).showToast();
         total();
+        numeroCarrito();
         mostrarCarrito();
     });
 
@@ -118,36 +120,38 @@ const agregarProducto = (id) =>{
                 });
                 console.log("click")
                 console.log(productoEnCarrito);
-    };
-    
+        };
     guardarLocal();
-};  
-    
+    };  
     productosApp.append(divCard);
     divCard.append(img1,divCardBody);
     divCard.append(img2,divCardBody);
     divCardBody.append(h5tag,ptagTalle,ptagPrecio,atag);
 
     // funcion agregado
-    
     atag.addEventListener('click',function(e){
         divCardBody.append(atag);
         atag.textContent = 'agregado';
         atag.classList.remove('btn-outline-primary');
         atag.classList.add('btn-warning');
+        setTimeout(() =>{
+            atag.classList.remove('btn-warning');
+            atag.classList.add('btn-outline-primary');
+            atag.textContent = 'agregar';
+        },3000);
     });
 
-    // funcion selector de img 
-    
-img1.addEventListener("mouseover", () => {
-    img1.src = producto.img2;
-    img2.src = producto.img1;
-});
-img1.addEventListener("mouseout", () => {
-    img1.src = producto.img1;
-    img2.src = producto.img2;
-});
-})
+        // funcion selector de img 
+        img1.addEventListener("mouseover", () => {
+            img1.src = producto.img2;
+            img2.src = producto.img1;
+        });
+        img1.addEventListener("mouseout", () => {
+            img1.src = producto.img1;
+            img2.src = producto.img2;
+        });
+    });
+    numeroCarrito();
 })
 .catch(error => console.log(error))
 
@@ -157,10 +161,21 @@ img1.addEventListener("mouseout", () => {
 
 // boton Carrito
 const botonCarrito = document.querySelector("#botonCarrito");
-if (botonCarrito){
     botonCarrito.innerHTML +=`
     <button id="buttonC" type="button" data-toggle="modal" data-target="#exampleModal"><img src="../img/carrito-de-compras.png" class="imgBoton"></button>`
-}
+    numeroDiv = document.createElement ("div");
+function numeroCarrito(){
+    if (productosElegidos.length === 0){
+    numeroDiv.innerHTML = '';
+    }else {
+    numeroDiv.innerHTML = '';
+    lengthCarrito = productosElegidos.length
+    numeroDiv.innerHTML = `<h2 id="numCarro">${lengthCarrito}</h2>`
+    numeroDiv.classList.add('numeroCarrito');
+    botonCarrito.appendChild(numeroDiv);
+    }
+};
+
 botonCarrito.addEventListener ("click", () => {
     mostrarCarrito();
 });
@@ -195,10 +210,10 @@ const mostrarCarrito = () => {
                 <img class="img-fluid img-carrito" src="${img}"/>
                 </div>
             <div>
-                <p>Cantidad: ${elegidos}</p>
-                <p>Producto: ${nombre}</p>
-                <p>Precio subTotal: ${precioSubTotal}</p>
-                <p>Precio: ${precio}</p>
+                <h3>${nombre}</h3>
+                <h4>Cantidad: ${elegidos}</h4>
+                <h4>Precio subTotal: ${precioSubTotal}</h4>
+                <h3>Precio: ${precio}</h3>
                 </div>
             </div>
             `;
@@ -233,8 +248,10 @@ const mostrarCarrito = () => {
                 };
                 guardarLocal();
                 total();
+                numeroCarrito();
                 });
             total();
+            numeroCarrito();
             modalBody.append(divCarrito);
         });
     };
@@ -246,11 +263,12 @@ const totalPrecio = productosElegidos.reduce((acumulador, producto) => acumulado
 
 
 fotterModalPadre.innerHTML= "";
-const fotterModal = document.createElement('p');
+const fotterModal = document.createElement('h2');
 fotterModal.classList.add('card','card-primary');
 fotterModal.setAttribute('id', 'totalPrecio')
 fotterModal.textContent = 'Total:$' + totalPrecio;
 
+//funcion vaciar carrito
 const botonVaciarCarrito = document.createElement('button');
 botonVaciarCarrito.classList.add('btn', 'btn-danger');
 botonVaciarCarrito.textContent = "Vaciar Carrito";
@@ -259,8 +277,10 @@ botonVaciarCarrito.addEventListener("click", (e) => {
     productoParaActualizar = [];
     productoParaActualizar.elegidos = 0;
     productosElegidos.elegidos = 0;
-    mostrarCarrito()
-    total()
+    mostrarCarrito();
+    total();
+    localStorage.clear();
+    numeroCarrito();
 });
 
 fotterModalPadre.append(botonVaciarCarrito);

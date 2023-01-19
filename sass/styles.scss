@@ -282,3 +282,19 @@ footer {
     width: 10vw;
     height: auto;
 }
+.numeroCarrito {
+    color: white;
+    background-color: #da8a0d;
+}
+#numCarro {
+    position: absolute;
+    background-color: #da8a0d;
+    padding: 5px 5px;
+    border-radius: 10px;
+    border: solid 1px black;
+}
+#botonCarrito {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
