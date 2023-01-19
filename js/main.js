@@ -164,6 +164,7 @@ const botonCarrito = document.querySelector("#botonCarrito");
     botonCarrito.innerHTML +=`
     <button id="buttonC" type="button" data-toggle="modal" data-target="#exampleModal"><img src="../img/carrito-de-compras.png" class="imgBoton"></button>`
     numeroDiv = document.createElement ("div");
+// numero del carrito
 function numeroCarrito(){
     if (productosElegidos.length === 0){
     numeroDiv.innerHTML = '';
