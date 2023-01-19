@@ -13,31 +13,13 @@ const productosApp = document.querySelector("#productos");
 const modalBody = document.querySelector("#modal-body");
 const fotterModalPadre = document.querySelector("#modalFooter");
 const botonProcesarCompra = document.querySelector("#botonProcesarCompra");
-const procesarCompra = document.querySelector("#procesarCompra");
+const precio = document.querySelector("#totalPrecio");
+
 const productosJson = "../json/productos.json";
 
 let productosElegidos = [];
 
-function compra() {
-    productosElegidos.forEach((producto) => {
-        const divCompra = document.createElement('div');
-        divCompra.classList.add('divCompra');
-        divCompra.innerHTML += `
-        <div class="modal-contenedor">
-            <div>
-                <img class="img-fluid img-carrito" src="${img}"/>
-            </div>
-                <div>
-                    <p>Producto: ${nombre}</p>
-                    <p>Precio: ${precio}</p>
-                    <p>Cantidad :${cantidad}</p>
-                    <button class="btn btn-danger"  onclick="eliminarProducto(${id})">Eliminar producto</button>
-                </div>
-            </div>
-        `
-        procesarCompra.appendChild(divCompra);
-    });
-    };
+
 
 function guardarLocal() {
     localStorage.setItem("productosElegidos", JSON.stringify(productosElegidos));
@@ -55,7 +37,6 @@ if(localStorage.getItem("productosElegidos")){
         // });
         } else {
         location.href = "compra.html";
-        compra();
         }
     });
 
@@ -70,11 +51,11 @@ fetch(productosJson)
     const img1 = document.createElement('img');
     const img2 = document.createElement('img');
     const divCardBody = document.createElement('div');
-    const h5tag = document.createElement('h3');
-    const ptagTalle = document.createElement('h4');
-    const ptagPrecio = document.createElement('h4');
+    const h5tag = document.createElement('h1');
+    const ptagTalle = document.createElement('h2');
+    const ptagPrecio = document.createElement('h2');
     const atag = document.createElement('button');
-    const tagTalle = document.createElement('h5');
+    const tagTalle = document.createElement('h3');
 
     divCard.classList.add('card','text-dark','mt-5');
     img1.classList.add('card-img-top','mt-2', 'img-fluid');
@@ -89,7 +70,7 @@ fetch(productosJson)
     img2.setAttribute('id', 'img2');
 
     h5tag.innerHTML= `${producto.nombre}`;
-    ptagTalle.innerHTML= `${producto.talle}`;
+    ptagTalle.innerHTML= `Talle ${producto.talle}`;
     ptagPrecio.innerHTML= `$${producto.precio}`;
     atag.textContent = 'Agregar';
     
@@ -142,7 +123,7 @@ const agregarProducto = (id) =>{
     guardarLocal();
 };  
     
-    productosApp .append(divCard);
+    productosApp.append(divCard);
     divCard.append(img1,divCardBody);
     divCard.append(img2,divCardBody);
     divCardBody.append(h5tag,ptagTalle,ptagPrecio,atag);
@@ -240,19 +221,20 @@ const mostrarCarrito = () => {
                     productosElegidos = productosElegidos.filter((producto) => producto.id !== prodId);
                     productoParaActualizar.elegidos = 0;
                     mostrarCarrito();
-                    total();
                 }
                 else {
                     let productoParaActualizar = productosElegidos.find((prod) =>{
                         return prod.id == producto.id
                     });
                     productoParaActualizar.elegidos = productoParaActualizar.elegidos - 1;
+                    let precioParaActualizar = productoParaActualizar.precio;
+                    productoParaActualizar.precioSubTotal = productoParaActualizar.elegidos * precioParaActualizar;
                     mostrarCarrito();
-                    total();
                 };
                 guardarLocal();
+                total();
                 });
-                total()
+            total();
             modalBody.append(divCarrito);
         });
     };

@@ -28,8 +28,65 @@
                 </ul>
             </div>
     </header>
-    
-    
+    <main>
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col">
+                    <h2 class="d-flex justify-content-center mb-3">Realizar Compra</h2>
+                    <form id="procesar-pago" method="POST">
+                        <div class="form-group row">
+                            <label for="cliente" class="col-12 col-md-2 col-form-label h2">Cliente :</label>
+                            <div class="col-12 col-md-10">
+                                <input type="text" class="form-control" id="cliente"
+                                    placeholder="Nombre y Apellido" name="persona">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-12 col-md-2 col-form-label h2">Correo :</label>
+                            <div class="col-12 col-md-10">
+                            <input type="text"  id="correo" class="form-control"  name="email.id" id="email.id"
+                            placeholder="Correo Electronico">
+                            </div>
+                        </div>
+                        <div id="carrito" class="form-group table-responsive">
+                            <table class="table" id="lista-compra">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Imagen</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Precio</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Sub Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="procesarCompra">
+                                </tbody>
+                                <tr>
+                                    <th colspan="4" scope="col" class="text-right">TOTAL
+                                        <p id="totalPrecio"></p>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="row justify-content-center d-none" id="spinner">
+                            <div class="spinner">
+                                <div class="dot1"></div>
+                                <div class="dot2"></div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-md-4 mb-2">
+                                <a href="productos.html" class="btn btn-info btn-block">Seguir comprando</a>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                <input type="submit" class="btn btn-success btn-block" id="button" value="Finalizar compra" >
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
     <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item"><a href="index.html" class="nav-link px-2 text-white">Home</a></li>
@@ -40,7 +97,7 @@
     </footer>
 </div>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="../js/main.js"></script>
+    <script src="../js/procesarCompra.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
