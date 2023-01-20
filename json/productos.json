@@ -1,10 +1,10 @@
 [
-    { "id":1, "nombre":"Chomba Champion", "precio":5000, "img1":"../img/2.png", "img2":"../img/1.png", "stock": 2, "talle":"M", "precioSubTotal":5000},
-    { "id":2, "nombre":"Buzo Michigan", "precio":7500, "img1":"../img/4.png", "img2":"../img/5.png", "stock": 2, "talle":"XL", "precioSubTotal":7500},
-    { "id":3, "nombre":"Buzo Raiders", "precio":8000, "img1":"../img/6.png", "img2":"../img/7.png", "stock": 2, "talle":"XL", "precioSubTotal":8000},
-    { "id":4, "nombre":"Chomba Polo Ralph Lauren", "precio":4000, "img1":"../img/9.png", "img2":"../img/10.png", "stock": 2, "talle":"L", "precioSubTotal":4000},
-    { "id":5, "nombre":"Chomba Tommy Hilfiger", "precio":3500, "img1":"../img/11.png", "img2":"../img/12.png", "stock": 2, "talle":"L", "precioSubTotal":3500},
-    { "id":6, "nombre":"Chomba Tommy Hilfiger", "precio":2500, "img1":"../img/13.png", "img2":"../img/14.png", "stock": 2, "talle":"M", "precioSubTotal":2500},
-    { "id":7, "nombre":"Chomba Polo Ralph Lauren", "precio":4500, "img1":"../img/15.png", "img2":"../img/16.png", "stock": 2, "talle":"L", "precioSubTotal":4500},
-    { "id":8, "nombre":"Chomba RLX Ralph Lauren", "precio":4500, "img1":"../img/17.png", "img2":"../img/18.png", "stock": 2, "talle":"M", "precioSubTotal":4500}
+    { "id":1, "nombre":"Chomba Champion", "precio":5000, "img1":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159172/cenicero/2_rdco0e.png", "img2":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159182/cenicero/1_uz1vu2.png", "stock": 2, "talle":"M", "precioSubTotal":5000},
+    { "id":2, "nombre":"Buzo Michigan", "precio":7500, "img1":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159171/cenicero/4_ds6p8c.png", "img2":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159182/cenicero/5_q7bypy.png", "stock": 2, "talle":"XL", "precioSubTotal":7500},
+    { "id":3, "nombre":"Buzo Raiders", "precio":8000, "img1":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159172/cenicero/6_puadtp.png", "img2":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159178/cenicero/7_ydanqe.png", "stock": 2, "talle":"XL", "precioSubTotal":8000},
+    { "id":4, "nombre":"Chomba Polo Ralph Lauren", "precio":4000, "img1":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159160/cenicero/9_wd5irt.png", "img2":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159189/cenicero/10_y6oxie.png", "stock": 2, "talle":"L", "precioSubTotal":4000},
+    { "id":5, "nombre":"Chomba Tommy Hilfiger", "precio":3500, "img1":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159159/cenicero/11_yf9fl8.png", "img2":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159166/cenicero/12_hgeyso.png", "stock": 2, "talle":"L", "precioSubTotal":3500},
+    { "id":6, "nombre":"Chomba Tommy Hilfiger", "precio":2500, "img1":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159154/cenicero/13_eacjun.png", "img2":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159174/cenicero/14_emkflb.png", "stock": 2, "talle":"M", "precioSubTotal":2500},
+    { "id":7, "nombre":"Chomba Polo Ralph Lauren", "precio":4500, "img1":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159154/cenicero/15_dtxhid.png", "img2":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159167/cenicero/16_dscyli.png", "stock": 2, "talle":"L", "precioSubTotal":4500},
+    { "id":8, "nombre":"Chomba RLX Ralph Lauren", "precio":4500, "img1":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159151/cenicero/17_dlbiuf.png", "img2":"https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159148/cenicero/18_uwsjwy.png", "stock": 2, "talle":"M", "precioSubTotal":4500}
 ]

@@ -13,11 +13,12 @@ const productosApp = document.querySelector("#productos");
 const modalBody = document.querySelector("#modal-body");
 const fotterModalPadre = document.querySelector("#modalFooter");
 const botonProcesarCompra = document.querySelector("#botonProcesarCompra");
-
-
 const productosJson = "../json/productos.json";
 
 let productosElegidos = [];
+
+
+
 
 
 //funcion guardar en local
@@ -162,7 +163,7 @@ const agregarProducto = (id) =>{
 // boton Carrito
 const botonCarrito = document.querySelector("#botonCarrito");
     botonCarrito.innerHTML +=`
-    <button id="buttonC" type="button" data-toggle="modal" data-target="#exampleModal"><img src="../img/carrito-de-compras.png" class="imgBoton"></button>`
+    <button id="buttonC" type="button" data-toggle="modal" data-target="#exampleModal"><img src="https://res.cloudinary.com/dsdicaf5h/image/upload/v1674159143/cenicero/carrito-de-compras_yhzjvc.png" class="imgBoton"></button>`
     numeroDiv = document.createElement ("div");
 // numero del carrito
 function numeroCarrito(){
