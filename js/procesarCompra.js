@@ -45,10 +45,10 @@ const email = document.querySelector('#email').value
     })
 // si lo llena que se envie un email confirmando la compra
 } else {
-    emailjs.send("service_hk938ah","template_nv80xgt",{
-        persona: persona,
-        email: email,
-        });
+    // emailjs.send("service_hk938ah","template_nv80xgt",{
+    //     persona: persona,
+    //     email: email,
+    //     });
 
     btn.value = 'Enviando...';
 
